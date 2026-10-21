@@ -52,3 +52,23 @@ export interface BudgetInquiry {
   guestCount?: string;
   notes?: string;
 }
+
+export interface ClientGalleryPhoto {
+  id: string;
+  title: string;
+  image: string;
+  aspectRatio: 'landscape' | 'portrait' | 'square';
+  moment: string;
+}
+
+export interface ClientGallery {
+  id: string;
+  accessCode: string;
+  clientName: string;
+  eventTitle: string;
+  eventDate: string;
+  location: string;
+  maxAlbumSelection: number;
+  coverImage: string;
+  photos: ClientGalleryPhoto[];
+}

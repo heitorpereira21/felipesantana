@@ -60,15 +60,17 @@ export const StorySection: React.FC<StorySectionProps> = ({ onOpenBookingForStor
 
         {/* Active Chapter Showcase Card */}
         <div className="bg-[#FAF8F5] border border-[#D8C8B5]/70 rounded-xl overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-12 items-center">
-          {/* Chapter Image Display with PhotoPlaceholder */}
+          {/* Chapter Image Display */}
           <div className="lg:col-span-7 relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-[480px] bg-[#EFE9E0] overflow-hidden">
-            <PhotoPlaceholder
-              label={activeChapter.title}
-              category={`Capítulo: ${activeChapter.moment}`}
-              aspectRatioText="16:9 · 2400 × 1350px"
-              orientation="landscape"
-              className="h-full"
+            <img
+              src={activeChapter.image}
+              alt={activeChapter.title}
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover object-center transition-all duration-700"
             />
+            <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-xs text-white text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-xs border border-white/20">
+              {activeChapter.moment}
+            </div>
           </div>
 
           {/* Chapter Narrative Description */}

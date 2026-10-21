@@ -4,13 +4,14 @@ import { Hero } from './components/Hero';
 import { PortfolioGrid } from './components/PortfolioGrid';
 import { StorySection } from './components/StorySection';
 import { AboutSection } from './components/AboutSection';
+import { ClientGalleryDemo } from './components/ClientGalleryDemo';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { BudgetCalculator } from './components/BudgetCalculator';
 import { LightboxModal } from './components/LightboxModal';
 import { AgencyProposalModal } from './components/AgencyProposalModal';
 import { Footer } from './components/Footer';
 import { PhotoItem } from './types';
-import { MessageCircle, Sparkles } from 'lucide-react';
+import { MessageCircle, Sparkles, SlidersHorizontal } from 'lucide-react';
 import { PHOTOGRAPHER_INFO } from './data/photographyData';
 
 export default function App() {
@@ -26,47 +27,54 @@ export default function App() {
 
   const handleQuickWhatsApp = () => {
     const text = encodeURIComponent(
-      `Olá Felipe Santana! Gostaria de conversar sobre orçamento e disponibilidade para ensaio/casamento.`
+      `Olá Felipe Santana! Acessei seu site e gostaria de conversar sobre orçamento e disponibilidade para casamento/ensaio.`
     );
     window.open(`https://wa.me/${PHOTOGRAPHER_INFO.whatsappNumber}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#1D1D1D] font-sans flex flex-col selection:bg-[#D8C8B5] selection:text-[#1D1D1D]">
-      {/* Top Header with 4VANCE Demo bar & Top Bar Contract */}
+      {/* Editorial Top Bar Contract & 4VANCE Concept Ribbon */}
       <Header
         onOpenAgencyProposal={() => setAgencyProposalOpen(true)}
         onNavigateToBooking={() => handleScrollToSection('contato')}
+        onNavigateToClientGallery={() => handleScrollToSection('galeria-cliente')}
       />
 
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Hero Section: Full cinematic impact, large image, minimal text */}
         <Hero
           onExplorePortfolio={() => handleScrollToSection('portfolio')}
-          onOpenBooking={() => handleScrollToSection('contato')}
         />
 
-        {/* Portfolio Visual Grid with filterable categories */}
+        {/* Portfolio Visual Grid: Asymmetric editorial composition with real photography */}
         <PortfolioGrid onSelectPhoto={(photo) => setSelectedPhoto(photo)} />
 
-        {/* Real Stories & Narrative Arc */}
+        {/* Real Stories Narrative Sequence */}
         <StorySection onOpenBookingForStory={() => handleScrollToSection('contato')} />
 
-        {/* About Felipe Santana & Studio Legacy */}
+        {/* About Felipe Santana: Concise, human, authentic portrait */}
         <AboutSection onOpenBooking={() => handleScrollToSection('contato')} />
 
-        {/* Real Verified Testimonials */}
+        {/* 4VANCE Commercial Differentiator: Private Client Album Photo Selection Demo */}
+        <ClientGalleryDemo />
+
+        {/* Real Verified Client Testimonials from Google & Casamentos */}
         <TestimonialsSection />
 
-        {/* Budget Calculator & Direct WhatsApp Conversion */}
+        {/* Visually Striking Commercial Contact & WhatsApp Generator */}
         <BudgetCalculator />
       </main>
 
-      {/* Footer */}
+      {/* Footer / Editorial Colophon */}
       <Footer onOpenAgencyProposal={() => setAgencyProposalOpen(true)} />
 
-      {/* Fullscreen Lightbox Modal */}
-      <LightboxModal photo={selectedPhoto} onClose={() => setSelectedPhoto(null)} />
+      {/* Fullscreen Lightbox Modal with Keyboard Navigation */}
+      <LightboxModal
+        photo={selectedPhoto}
+        onClose={() => setSelectedPhoto(null)}
+        onNavigate={(photo) => setSelectedPhoto(photo)}
+      />
 
       {/* 4VANCE Strategy Pitch Modal */}
       <AgencyProposalModal
@@ -74,13 +82,13 @@ export default function App() {
         onClose={() => setAgencyProposalOpen(false)}
       />
 
-      {/* Floating Action Buttons (Sticky & Compliant with Mobile Cap) */}
+      {/* Floating Action Controls */}
       <div className="fixed bottom-4 right-4 z-30 flex items-center gap-2">
-        {/* 4VANCE Proposal Pill button */}
+        {/* 4VANCE Strategic View Pill */}
         <button
           onClick={() => setAgencyProposalOpen(true)}
-          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 bg-[#1D1D1D]/90 hover:bg-[#1D1D1D] text-[#D8C8B5] text-xs font-medium rounded-full shadow-lg backdrop-blur-xs transition-all border border-[#333333] cursor-pointer"
-          title="Ver proposta estratégica da 4VANCE"
+          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 bg-[#171717] hover:bg-black text-[#D8C8B5] text-xs font-mono uppercase tracking-wider rounded-full shadow-lg backdrop-blur-xs transition-all border border-[#333333] cursor-pointer"
+          title="Ver proposta comercial e visão da 4VANCE"
         >
           <Sparkles className="w-3.5 h-3.5 text-[#D8C8B5]" />
           <span>Visão 4VANCE</span>
@@ -91,7 +99,7 @@ export default function App() {
           onClick={handleQuickWhatsApp}
           className="p-3.5 bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white rounded-full shadow-lg transition-transform cursor-pointer flex items-center justify-center"
           aria-label="Abrir conversa no WhatsApp"
-          title="Conversar no WhatsApp com Felipe Santana (+55 32 99918-2169)"
+          title={`Conversar no WhatsApp com Felipe Santana (${PHOTOGRAPHER_INFO.phoneDisplay})`}
         >
           <MessageCircle className="w-6 h-6 fill-white" />
         </button>
